@@ -1,0 +1,93 @@
+﻿@font-face {
+    font-family: Jaldi;
+    font-style: normal;
+    font-weight: 400;
+    src: url(http://fonts.gstatic.com/s/jaldi/v2/rHG4LRTTXyqBtS72qs_SYg.woff2) format('woff2');
+}
+
+html {
+    margin: 0;
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    margin: 0;
+    height: 100%;
+    font-family: Jaldi, sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    background-color: #14100c;
+    color: #a0a0a0;
+}
+
+p {
+    margin: 0 0 -10px 0;
+    font-family: Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", monospace;
+}
+
+#page-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#header {
+    background-color: #303030;
+    height: 34px;
+    padding: 6px 0 0 6px;
+}
+
+#main-container {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+#render-container {
+    display: flex;
+    flex-grow: 1;
+    background-color: black;
+}
+
+#sidebar {
+    display: none;
+    background-color: #202020;
+    width: 256px;
+}
+
+.button {
+    background: #e0e0e0;
+    background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
+    color: #000000;
+    border: solid #bdbdbd 1px;
+    text-decoration: none;
+    display: inline-block;
+    height: 24px;
+    line-height: 24px;
+    user-select: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: #f0f0f0;
+    background-image: linear-gradient(to bottom, #ffffff, #f0f0f0);
+}
+
+.button label {
+    user-select: none;
+    padding: 2px 10px 2px 10px;
+    cursor: pointer;
+}
+
+.action-buttons {
+    width: 30px;
+    text-align: center;
+}
+
+#color-picker-on,
+#color-picker-off {
+    height: 28px;
+    vertical-align: middle;
+}
