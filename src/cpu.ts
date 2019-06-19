@@ -593,15 +593,19 @@ export class CPU {
                                 //Set I = I + Vx.
                                 //The values of I and Vx are added, and the results are stored in I.
 
-                                //Check FX1E (I = I + VX) buffer overflow.
-                                //If buffer overflow, register VF must be set to 1, otherwise 0. As a result, register VF not set to 1.
+                                this.I = (this.I + this.V[opcode2]) & 0xFFF;
 
-                                this.I += this.V[opcode2];
+                                // Test ROM "SCTEST" states that if I = I + Vx generates an overflow,
+                                // Vf should be set to 1, 0 otherwise. That's apparently incorrect.
+                                // However, the game Spacefight 2091 needs that feature.
+                                // TODO: That should probably be added as an alternate opcode setting
 
-                                if (this.I > 0xFFF)
-                                    this.V[0xF] = 1;
-                                else
-                                    this.V[0xF] = 0;
+                                // this.I += this.V[opcode2];
+
+                                // if (this.I > 0xFFF)
+                                //     this.V[0xF] = 1;
+                                // else
+                                //     this.V[0xF] = 0;
 
                                 break;
                             }
@@ -806,7 +810,7 @@ export class CPU {
     }
 
     private UnknownOpcode(currentOpcode: number): void {
-        console.error(`Unknown Opcode: 0x${Number(currentOpcode).toString(16)} at 0x${Number(this.PC - 0x202).toString(16)}`);
+        console.error(`Unknown Opcode: 0x${Number(currentOpcode).toString(16)} at RAM: 0x${Number(this.PC - 0x2).toString(16)}, ROM: 0x${Number(this.PC - 0x202).toString(16)}`);
         this.finishCallback();
     }
 }
