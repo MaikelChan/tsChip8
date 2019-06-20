@@ -1,9 +1,4 @@
-﻿@font-face {
-    font-family: Jaldi;
-    font-style: normal;
-    font-weight: 400;
-    src: url(http://fonts.gstatic.com/s/jaldi/v2/rHG4LRTTXyqBtS72qs_SYg.woff2) format('woff2');
-}
+﻿@import url('https://fonts.googleapis.com/css?family=Jaldi&display=swap');
 
 html {
     margin: 0;
