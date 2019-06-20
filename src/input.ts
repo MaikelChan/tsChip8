@@ -1,6 +1,6 @@
 import { KEYS_LENGTH } from "./chip8";
 
-export const enum InputStates { KeyUp, KeyDown, KeyHeld };
+export const enum InputStates { KeyUp, KeyDown, KeyReleased };
 
 export class Input {
 
@@ -19,8 +19,10 @@ export class Input {
 
     public Update(): void {
         for (let n = 0; n < KEYS_LENGTH; n++) {
-            if (this.lastKeyState[n] === InputStates.KeyDown && this.currentKeyState[n] === InputStates.KeyDown)
-                this.currentKeyState[n] = InputStates.KeyHeld;
+            if (this.lastKeyState[n] === InputStates.KeyDown && this.currentKeyState[n] === InputStates.KeyUp)
+                this.currentKeyState[n] = InputStates.KeyReleased;
+            else if (this.currentKeyState[n] === InputStates.KeyReleased)
+                this.currentKeyState[n] = InputStates.KeyUp;
 
             this.lastKeyState[n] = this.currentKeyState[n];
         }

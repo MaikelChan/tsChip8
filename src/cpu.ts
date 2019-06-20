@@ -72,9 +72,9 @@ export class CPU {
             if (this.waitForRender) break;
 
             this.ProcessOpcodes();
+            this.input.Update();
         }
 
-        this.input.Update();
         this.DecrementTimers();
     }
 
@@ -511,7 +511,7 @@ export class CPU {
                                 //Skip next instruction if key with the value of Vx is pressed.
                                 //Checks the keyboard, and if the key corresponding to the value of Vx is currently in the down position, PC is increased by 2.
 
-                                if (this.input.currentKeyState[this.V[opcode2]] === InputStates.KeyDown || this.input.currentKeyState[this.V[opcode2]] === InputStates.KeyHeld) this.PC += 2;
+                                if (this.input.currentKeyState[this.V[opcode2]] === InputStates.KeyDown) this.PC += 2;
                                 break;
                             }
 
@@ -521,7 +521,7 @@ export class CPU {
                                 //Skip next instruction if key with the value of Vx is not pressed.
                                 //Checks the keyboard, and if the key corresponding to the value of Vx is currently in the up position, PC is increased by 2.
 
-                                if (this.input.currentKeyState[this.V[opcode2]] === InputStates.KeyUp) this.PC += 2;
+                                if (this.input.currentKeyState[this.V[opcode2]] !== InputStates.KeyDown) this.PC += 2;
                                 break;
                             }
 
@@ -552,17 +552,27 @@ export class CPU {
                                 //All execution stops until a key is pressed, then the value of that key is stored in Vx.
                                 //Chip8 Wait for key release. SCHip, wait for key press.
 
-                                this.PC -= 2;
                                 let pressed = false;
 
-                                for (let n = 0; n < KEYS_LENGTH; n++) {
-                                    if (this.input.currentKeyState[n] === InputStates.KeyDown) {
-                                        this.V[opcode2] = n;
-                                        pressed = true;
+                                if (this.emulationMode == EmulationModes.Chip8) {
+                                    for (let k = 0; k < KEYS_LENGTH; k++) {
+                                        if (this.input.currentKeyState[k] === InputStates.KeyReleased) {
+                                            this.V[opcode2] = k;
+                                            pressed = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                                else {
+                                    for (let k = 0; k < KEYS_LENGTH; k++) {
+                                        if (this.input.currentKeyState[k] === InputStates.KeyDown) {
+                                            this.V[opcode2] = k;
+                                            pressed = true;
+                                        }
                                     }
                                 }
 
-                                if (pressed) this.PC += 2;
+                                if (!pressed) this.PC -= 2;
 
                                 break;
                             }
