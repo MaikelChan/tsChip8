@@ -30,6 +30,8 @@ export class Main {
     private sound?: Sound;
     private renderer?: IRenderer;
 
+    private VRAM?: Uint8Array;
+
     constructor() {
         this.openFileButton = document.getElementById("files") as HTMLInputElement;
         this.playButton = document.getElementById("button-run") as HTMLInputElement;
@@ -114,7 +116,7 @@ export class Main {
         if (this.renderer !== undefined) this.renderer.Dispose();
 
         switch (index) {
-            case 0:
+            default:
                 this.renderer = new WebGLRenderer(this.renderContainer, this.offColorPicker.value, this.onColorPicker.value);
                 break;
             case 1:
@@ -124,6 +126,8 @@ export class Main {
                 this.renderer = new ASCIIRenderer(this.renderContainer, this.offColorPicker.value, this.onColorPicker.value)
                 break;
         }
+
+        if (this.VRAM !== undefined) this.renderer.SetVRAM(this.VRAM);
     }
 
     // HTML Page --------------------------------------------------------------------------------------------------------------
@@ -183,7 +187,8 @@ export class Main {
                 break;
             case Chip8CommandIDs.SendVRAM:
                 if (command.parameters === undefined) break;
-                this.renderer!.SetVRAM(command.parameters[0]);
+                this.VRAM = command.parameters[0];
+                if (this.VRAM !== undefined) this.renderer!.SetVRAM(this.VRAM);
                 break;
             case Chip8CommandIDs.PlaySound:
                 this.sound!.Play();
