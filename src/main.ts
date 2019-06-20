@@ -24,6 +24,7 @@ export class Main {
     private readonly renderContainer: HTMLDivElement;
 
     private chip8Worker: Chip8Worker;
+    private isRunning: boolean;
 
     private input?: InputEvents;
     private sound?: Sound;
@@ -41,6 +42,7 @@ export class Main {
         this.renderContainer = document.getElementById("render-container") as HTMLDivElement;
 
         this.chip8Worker = new Chip8Worker();
+        this.isRunning = false;
 
         // Set HTML page event listeners
         this.playButton.addEventListener("click", this.RunButtonOnClick);
@@ -64,6 +66,7 @@ export class Main {
             this.sound = new Sound();
         }
 
+        this.isRunning = true;
         this.SetRenderer(this.rendererSelect.selectedIndex);
     }
 
@@ -82,6 +85,8 @@ export class Main {
             this.renderer.Dispose();
             this.renderer = undefined;
         }
+
+        this.isRunning = false;
     }
 
     private OnChip8StateChanged = (state: EmulationStates): void => {
@@ -104,6 +109,8 @@ export class Main {
     }
 
     private SetRenderer = (index: number): void => {
+        if (!this.isRunning) return;
+
         if (this.renderer !== undefined) this.renderer.Dispose();
 
         switch (index) {
