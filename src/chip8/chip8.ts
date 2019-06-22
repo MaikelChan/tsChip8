@@ -1,6 +1,5 @@
 ﻿import { CPU } from "./cpu";
 import { Memory } from "./memory";
-import { Sound } from "./sound";
 import { InputStates, Input } from "./input";
 import { InitialSettings, Chip8Command, MainCommand } from "./interfaces";
 

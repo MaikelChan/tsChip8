@@ -1,5 +1,5 @@
-import { IRenderer } from "./interfaces";
-import { RES_Y, RES_X } from "./chip8";
+import { IRenderer } from "../chip8/interfaces";
+import { RES_Y, RES_X } from "../chip8/chip8";
 
 export class ASCIIRenderer implements IRenderer {
     private readonly renderContainer: HTMLDivElement;

@@ -1,7 +1,7 @@
 ﻿import * as THREE from "three";
-import { DotShader } from "./shaders/dot";
-import { RES_X, RES_Y } from "./chip8";
-import { IRenderer } from "./interfaces";
+import { DotShader } from "../shaders/dot";
+import { RES_X, RES_Y } from "../chip8/chip8";
+import { IRenderer } from "../chip8/interfaces";
 
 const HALF_X: number = RES_X >> 1;
 const HALF_Y: number = RES_Y >> 1;

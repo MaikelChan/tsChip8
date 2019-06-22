@@ -1,4 +1,4 @@
-import { IDisposable } from "./interfaces";
+import { IDisposable } from "./chip8/interfaces";
 
 export class Sound implements IDisposable {
     private audioContext: AudioContext;

@@ -22,9 +22,9 @@ module.exports = function (env /*, argv*/ ) {
             rules: [
                 // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
                 {
-                    test: /\.tsx?$/,
-                    loader: "ts-loader"
-                    //exclude: /node_modules/ // Is this necessary?
+                    test: /\.(ts|tsx)?$/,
+                    loader: "ts-loader",
+                    exclude: /node_modules/
                 }/*,
                 {
                     test: /\.worker\.ts$/,

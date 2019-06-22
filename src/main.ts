@@ -1,12 +1,12 @@
 ﻿//import { Chip8 } from "./chip8";
-import Chip8Worker from "worker-loader?name=worker.js!./chip8";
-import { EmulationStates, MainCommandIDs, Chip8CommandIDs } from "./chip8";
+import Chip8Worker from "worker-loader?name=worker.js!./chip8/chip8";
+import { EmulationStates, MainCommandIDs, Chip8CommandIDs } from "./chip8/chip8";
+import { InitialSettings, MainCommand, Chip8Command, IRenderer } from "./chip8/interfaces";
 import { InputEvents } from "./input-events";
-import { WebGLRenderer } from "./webgl-renderer";
-import { InitialSettings, MainCommand, Chip8Command, IRenderer } from "./interfaces";
-import { ASCIIRenderer } from "./ascii-renderer";
 import { Sound } from "./sound";
-import { CanvasRenderer } from "./canvas-renderer";
+import { WebGLRenderer } from "./renderers/webgl-renderer";
+import { CanvasRenderer } from "./renderers/canvas-renderer";
+import { ASCIIRenderer } from "./renderers/ascii-renderer";
 
 // "this" context lost: https://charliejwalter.net/this-context-lost-in-javascript-typescript/
 

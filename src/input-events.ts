@@ -1,7 +1,7 @@
 ﻿import { Main } from "./main";
-import { KEYS_LENGTH, MainCommandIDs } from "./chip8";
-import { InputStates } from "./input";
-import { IDisposable } from "./interfaces";
+import { KEYS_LENGTH, MainCommandIDs } from "./chip8/chip8";
+import { InputStates } from "./chip8/input";
+import { IDisposable } from "./chip8/interfaces";
 
 export class InputEvents implements IDisposable {
     private readonly main: Main;
