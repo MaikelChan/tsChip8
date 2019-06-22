@@ -31,9 +31,10 @@ So after much investigation, I figured out what the actual behaviour of the Chip
 - Full Chip8 and SuperChip compatibility.
 - Settings that allow to simulate wrong behaviours in order to execute problematic games.
 - Three rendering modes that can be switched at any time:
-    1. WebGL: This is the most sophisticated one. The game is shown in some kind of led screen in a virtual 3D environment, that features some realtime lighting and a screen refresh rate shader effect. Because why not!
-    2. Canvas: The game will be rendered into a 2D canvas.
-    3. ASCII: The game will be rendered with text characters. Easy to implement since the Chip8 and SuperChip are monochrome.
+    1. WebGL: The game is shown in some kind of led screen in a virtual 3D environment, that features some realtime lighting and a screen refresh rate shader effect. Because why not!
+    2. WebGL-Voxel: Similar to the WebGL renderer but the screen is rendered with GPU instanced voxels.
+    3. Canvas: The game will be rendered into a 2D canvas.
+    4. ASCII: The game will be rendered with text characters. Easy to implement since the Chip8 and SuperChip are monochrome.
 - All rendering modes allow to customize rendering colors.
 - Sound is also emulated. Chip8 has very basic sound capabilities. It's only capable to reproduce a "beep" sound of configurable duration.
 

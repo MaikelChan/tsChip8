@@ -6,6 +6,9 @@ import { IRenderer } from "../chip8/interfaces";
 const HALF_X: number = RES_X >> 1;
 const HALF_Y: number = RES_Y >> 1;
 
+const ENV_COLOR1: THREE.Color = new THREE.Color(0x000000);
+const ENV_COLOR2: THREE.Color = new THREE.Color(0x2c2430);
+
 export class WebGLRenderer implements IRenderer {
 	private renderContainer: HTMLDivElement;
 	private canvas: HTMLCanvasElement;
@@ -142,8 +145,8 @@ export class WebGLRenderer implements IRenderer {
 
 		//bgGeometry.attributes.color. .getAttribute("color").array;
 
-		let c1 = new THREE.Color(0x000000);
-		let c2 = new THREE.Color(0x2c2430);
+		const c1 = ENV_COLOR1;
+        const c2 = ENV_COLOR2;
 		let bgColors: THREE.Color[] = [c1, c2, c1, c2, c2, c1, c1, c2, c1, c2, c2, c1, c1, c1, c1, c1, c1, c1, c2, c2, c2, c2, c2, c2, c1, c1, c1, c1, c1, c1, c1, c2, c1, c2, c2, c1];
 
 		for (let f = 0; f < this.bgGeometry.faces.length; f++) {
@@ -269,10 +272,10 @@ export class WebGLRenderer implements IRenderer {
 		}
 	}
 
-	private RotateCamera(angle: number, limit: number): void {
-		let s = Math.sin(angle);
+	private RotateCamera(time: number, range: number): void {
+		let s = Math.sin(time);
 
-		this.camera.position.x = -this.camera.position.z * s * limit;
+		this.camera.position.x = -this.camera.position.z * s * range;
 		this.camera.position.x += HALF_X;
 
 		this.camera.lookAt(this.cameraTarget);

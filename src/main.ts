@@ -5,6 +5,7 @@ import { InitialSettings, MainCommand, Chip8Command, IRenderer } from "./chip8/i
 import { InputEvents } from "./input-events";
 import { Sound } from "./sound";
 import { WebGLRenderer } from "./renderers/webgl-renderer";
+import { WebGLVoxelRenderer } from "./renderers/webgl-voxel-renderer";
 import { CanvasRenderer } from "./renderers/canvas-renderer";
 import { ASCIIRenderer } from "./renderers/ascii-renderer";
 
@@ -120,9 +121,12 @@ export class Main {
                 this.renderer = new WebGLRenderer(this.renderContainer, this.offColorPicker.value, this.onColorPicker.value);
                 break;
             case 1:
-                this.renderer = new CanvasRenderer(this.renderContainer, this.offColorPicker.value, this.onColorPicker.value);
+                this.renderer = new WebGLVoxelRenderer(this.renderContainer, this.offColorPicker.value, this.onColorPicker.value);
                 break;
             case 2:
+                this.renderer = new CanvasRenderer(this.renderContainer, this.offColorPicker.value, this.onColorPicker.value);
+                break;
+            case 3:
                 this.renderer = new ASCIIRenderer(this.renderContainer, this.offColorPicker.value, this.onColorPicker.value)
                 break;
         }

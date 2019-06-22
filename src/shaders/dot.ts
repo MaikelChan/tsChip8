@@ -5,7 +5,7 @@ export const DotShader = {
 	uniforms:
 	{
 		time: { value: <number>0.0 },
-		texture: { value: <THREE.Texture>new THREE.TextureLoader().load("img/dot.png") },
+		texture: { value: <THREE.Texture | undefined>undefined },
 		colorOff: { value: <THREE.Color>new THREE.Color(0.5, 0.5, 0.5) },
 		colorOn: { value: <THREE.Color>new THREE.Color(1.0, 1.0, 1.0) },
 		dotSize: { value: <number>1.0 }
