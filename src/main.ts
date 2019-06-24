@@ -1,7 +1,7 @@
 ﻿//import { Chip8 } from "./chip8";
 import Chip8Worker from "worker-loader?name=worker.js!./chip8/chip8";
 import { EmulationStates, MainCommandIDs, Chip8CommandIDs } from "./chip8/chip8";
-import { InitialSettings, MainCommand, Chip8Command, IRenderer } from "./chip8/interfaces";
+import { IInitialSettings, IMainCommand, IChip8Command, IRenderer } from "./chip8/interfaces";
 import { InputEvents } from "./input-events";
 import { Sound } from "./sound";
 import { WebGLRenderer } from "./renderers/webgl-renderer";
@@ -15,8 +15,8 @@ export class Main {
 
     // HTML Elements
     private readonly openFileButton: HTMLInputElement;
-    private readonly playButton: HTMLInputElement;
-    private readonly stopButton: HTMLInputElement;
+    private readonly playButton: HTMLDivElement;
+    private readonly stopButton: HTMLDivElement;
     private readonly alt8xy6OpcodeCheckbox: HTMLInputElement;
     private readonly altFx55OpcodeCheckbox: HTMLInputElement;
     private readonly offColorPicker: HTMLInputElement;
@@ -35,8 +35,8 @@ export class Main {
 
     constructor() {
         this.openFileButton = document.getElementById("files") as HTMLInputElement;
-        this.playButton = document.getElementById("button-run") as HTMLInputElement;
-        this.stopButton = document.getElementById("button-stop") as HTMLInputElement;
+        this.playButton = document.getElementById("button-run") as HTMLDivElement;
+        this.stopButton = document.getElementById("button-stop") as HTMLDivElement;
         this.alt8xy6OpcodeCheckbox = document.getElementById("8xy6-checkbox") as HTMLInputElement;
         this.altFx55OpcodeCheckbox = document.getElementById("Fx55-checkbox") as HTMLInputElement;
         this.offColorPicker = document.getElementById("color-picker-off") as HTMLInputElement;
@@ -95,17 +95,17 @@ export class Main {
     private OnChip8StateChanged = (state: EmulationStates): void => {
         switch (state) {
             case EmulationStates.Stopped:
-                this.playButton.disabled = false;
-                this.stopButton.disabled = true;
+                this.playButton.classList.remove("disabled");
+                this.stopButton.classList.add("disabled");
                 this.TerminateEmulation();
                 break;
             case EmulationStates.LoadingROM:
-                this.playButton.disabled = true;
-                this.stopButton.disabled = true;
+                this.playButton.classList.add("disabled");
+                this.stopButton.classList.add("disabled");
                 break;
             case EmulationStates.Run:
-                this.playButton.disabled = true;
-                this.stopButton.disabled = false;
+                this.playButton.classList.add("disabled");
+                this.stopButton.classList.remove("disabled");
                 this.InitializeEmulation();
                 break;
         }
@@ -140,7 +140,7 @@ export class Main {
         let files = this.openFileButton.files;
 
         if (files != null && files.length > 0) {
-            let initialSettings: InitialSettings = {
+            let initialSettings: IInitialSettings = {
                 alt8xy6Opcode: this.alt8xy6OpcodeCheckbox.checked,
                 altFx55Opcode: this.altFx55OpcodeCheckbox.checked
             }
@@ -175,12 +175,12 @@ export class Main {
         this.chip8Worker.addEventListener("error", this.ReceiveError);
     }
 
-    public SendCommand = (command: MainCommand): void => {
+    public SendCommand = (command: IMainCommand): void => {
         this.chip8Worker.postMessage(command);
     }
 
     private ReceiveCommand = (event: MessageEvent) => {
-        let command: Chip8Command = event.data as Chip8Command;
+        let command: IChip8Command = event.data as IChip8Command;
         //console.log(`Received command from Chip8: { id: ${command.id}, parameters: ${command.parameters} }`);
 
         switch (command.id) {

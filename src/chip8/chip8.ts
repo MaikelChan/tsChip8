@@ -1,7 +1,7 @@
 ﻿import { CPU } from "./cpu";
 import { Memory } from "./memory";
 import { InputStates, Input } from "./input";
-import { InitialSettings, Chip8Command, MainCommand } from "./interfaces";
+import { IInitialSettings, IChip8Command, IMainCommand } from "./interfaces";
 
 export const enum EmulationModes {
 	Chip8, SuperChip
@@ -41,7 +41,7 @@ export class Chip8 {
 	private cpu?: CPU;
 
 	// Initial config variables
-	private initialSettings?: InitialSettings;
+	private initialSettings?: IInitialSettings;
 
 	constructor() {
 		this.worker = self as any;
@@ -52,7 +52,7 @@ export class Chip8 {
 		this.InitializeWorker();
 	}
 
-	private Initialize(file: File, initialSettins: InitialSettings): void {
+	private Initialize(file: File, initialSettins: IInitialSettings): void {
 		if (this.emulationState !== EmulationStates.Stopped) return;
 
 		this.initialSettings = initialSettins;
@@ -121,12 +121,12 @@ export class Chip8 {
 		this.worker.addEventListener("message", this.ReceiveCommand);
 	}
 
-	public SendCommand = (command: Chip8Command): void => {
+	public SendCommand = (command: IChip8Command): void => {
 		this.worker.postMessage(command);
 	}
 
 	private ReceiveCommand = (event: MessageEvent): void => {
-		let command: MainCommand = event.data as MainCommand;
+		let command: IMainCommand = event.data as IMainCommand;
 		//console.log(`Received command from Main: { id: ${command.id}, parameters: ${command.parameters} }`);
 
 		switch (command.id) {

@@ -1,16 +1,16 @@
 import { MainCommandIDs, Chip8CommandIDs } from "./chip8";
 
-export interface MainCommand {
+export interface IMainCommand {
     id: MainCommandIDs,
     parameters?: any[]
 }
 
-export interface Chip8Command {
+export interface IChip8Command {
     id: Chip8CommandIDs,
     parameters?: any[]
 }
 
-export interface InitialSettings {
+export interface IInitialSettings {
     alt8xy6Opcode: boolean,
     altFx55Opcode: boolean
 }

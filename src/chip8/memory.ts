@@ -58,6 +58,18 @@ export class Memory {
         for (let n = 0; n < size; n++) this.VRAM[n] = 0;
     }
 
+    public GetPixel(x: number, y: number): number {
+        return this.VRAM[RES_X * y + x];
+    }
+
+    public SetPixel(x: number, y: number): void {
+        this.VRAM[RES_X * y + x] ^= 1;
+    }
+
+    public SetPixelValue(x: number, y: number, value: number): void {
+        this.VRAM[RES_X * y + x] = value;
+    }
+
     private LoadROMInRAM(romData: Uint8Array): void {
         for (let n = 0; n < romData.length; n++) this.RAM[ROM_START_ADDRESS + n] = romData[n];
     }

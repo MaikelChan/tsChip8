@@ -159,11 +159,11 @@ export class WebGLVoxelRenderer implements IRenderer {
         let ambientLight = new THREE.AmbientLight(ENV_COLOR2);
         this.scene.add(ambientLight);
 
-        this.light0 = new THREE.PointLight(this.onColor, 1.5, 500, 2);
+        this.light0 = new THREE.PointLight(this.onColor, 1, 500, 2);
         this.light0.position.set(LIGHT_0_POSITION.x, LIGHT_0_POSITION.y, LIGHT_0_POSITION.z);
         this.scene.add(this.light0);
 
-        this.light1 = new THREE.PointLight(this.offColor, 1.5, 500, 2);
+        this.light1 = new THREE.PointLight(this.offColor, 1, 500, 2);
         this.light1.position.set(LIGHT_1_POSITION.x, LIGHT_1_POSITION.y, LIGHT_1_POSITION.z);
         this.scene.add(this.light1);
 
@@ -209,7 +209,7 @@ export class WebGLVoxelRenderer implements IRenderer {
         if (this.initialTime < 0) this.initialTime = now;
         let elapsedSeconds: number = (now - this.initialTime) / 1000;
 
-        this.RotateCamera(elapsedSeconds, 0.1);
+        //this.RotateCamera(elapsedSeconds, 0.1);
 
         VertexLitInstanced.uniforms.time.value = elapsedSeconds;
 

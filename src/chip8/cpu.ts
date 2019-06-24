@@ -143,10 +143,10 @@ export class CPU {
 
                                 for (let y = 0; y < RES_Y; y++) {
                                     for (let x = RES_X - 4 - 1; x >= 0; x--) {
-                                        this.memory.VRAM[this.GetXY(x + 4, y)] = this.memory.VRAM[this.GetXY(x, y)];
+                                        this.memory.SetPixelValue(x + 4, y, this.memory.GetPixel(x, y));
                                     }
 
-                                    for (let x = 0; x < 4; x++) this.memory.VRAM[this.GetXY(x, y)] = 0;
+                                    for (let x = 0; x < 4; x++) this.memory.SetPixelValue(x, y, 0);
                                 }
 
                                 this.SendVRAM();
@@ -159,10 +159,10 @@ export class CPU {
 
                                 for (let y = 0; y < RES_Y; y++) {
                                     for (let x = 4; x < RES_X; x++) {
-                                        this.memory.VRAM[this.GetXY(x - 4, y)] = this.memory.VRAM[this.GetXY(x, y)];
+                                        this.memory.SetPixelValue(x - 4, y, this.memory.GetPixel(x, y));
                                     }
 
-                                    for (let x = RES_X - 4; x < RES_X; x++) this.memory.VRAM[this.GetXY(x, y)] = 0;
+                                    for (let x = RES_X - 4; x < RES_X; x++) this.memory.SetPixelValue(x, y, 0);
                                 }
 
                                 this.SendVRAM();
@@ -199,10 +199,10 @@ export class CPU {
 
                                 for (let x = 0; x < RES_X; x++) {
                                     for (let y = RES_Y - opcode4 - 1; y >= 0; y--) {
-                                        this.memory.VRAM[this.GetXY(x, y + opcode4)] = this.memory.VRAM[this.GetXY(x, y)];
+                                        this.memory.SetPixelValue(x, y + opcode4, this.memory.GetPixel(x, y));
                                     }
 
-                                    for (let y = 0; y < opcode4; y++) this.memory.VRAM[this.GetXY(x, y)] = 0;
+                                    for (let y = 0; y < opcode4; y++) this.memory.SetPixelValue(x, y, 0);
                                 }
 
                                 this.SendVRAM();
@@ -646,13 +646,14 @@ export class CPU {
                             {
                                 //Fx33 - LD B, Vx
                                 //Store BCD representation of Vx in memory locations I, I+1, and I+2.
-                                //The interpreter takes the decimal value of Vx, and places the hundreds digit in memory at location in I, the tens digit at location I+1, and the ones digit at location I+2.
+                                //The interpreter takes the decimal value of Vx, and places the hundreds digit in memory at location in I,
+                                //the tens digit at location I+1, and the ones digit at location I+2.
 
-                                let str = "00" + this.V[opcode2];
+                                // Bitwise OR 0 is an efficient way to remove the decimal part after the division
+                                this.memory.RAM[this.I + 0] = ((this.V[opcode2] / 100) | 0) % 10;
+                                this.memory.RAM[this.I + 1] = ((this.V[opcode2] / 10) | 0) % 10;
+                                this.memory.RAM[this.I + 2] = this.V[opcode2] % 10;
 
-                                this.memory.RAM[this.I] = parseInt(str.substr(str.length - 3, 1));
-                                this.memory.RAM[this.I + 1] = parseInt(str.substr(str.length - 2, 1));
-                                this.memory.RAM[this.I + 2] = parseInt(str.substr(str.length - 1, 1));
                                 break;
                             }
 
@@ -756,12 +757,12 @@ export class CPU {
 
                     if (((line << w) & 0x80) === 0x80) {
                         if (px < RES_X && py < RES_Y) { // Check that the pixel is not drawn out of the screen
-                            if (this.memory.VRAM[this.GetXY(px, py)] === 1) this.V[0xF] = 1;
+                            if (this.memory.GetPixel(px, py) === 1) this.V[0xF] = 1;
 
-                            this.memory.VRAM[this.GetXY(px + 0, py + 0)] ^= 1;
-                            this.memory.VRAM[this.GetXY(px + 1, py + 0)] ^= 1;
-                            this.memory.VRAM[this.GetXY(px + 0, py + 1)] ^= 1;
-                            this.memory.VRAM[this.GetXY(px + 1, py + 1)] ^= 1;
+                            this.memory.SetPixel(px + 0, py + 0);
+                            this.memory.SetPixel(px + 1, py + 0);
+                            this.memory.SetPixel(px + 0, py + 1);
+                            this.memory.SetPixel(px + 1, py + 1);
                         }
                     }
                 }
@@ -782,8 +783,8 @@ export class CPU {
 
                         if (((line << w) & 0x80) === 0x80) {
                             if (px < RES_X && py < RES_Y) { // Check that the pixel is not drawn out of the screen
-                                if (this.memory.VRAM[this.GetXY(px, py)] === 1) this.V[0xF] = 1;
-                                this.memory.VRAM[this.GetXY(px, py)] ^= 1;
+                                if (this.memory.GetPixel(px, py) === 1) this.V[0xF] = 1;
+                                this.memory.SetPixel(px, py);
                             }
                         }
                     }
@@ -813,10 +814,6 @@ export class CPU {
     private SendVRAM(): void {
         this.waitForRender = true;
         this.chip8.SendCommand({ id: Chip8CommandIDs.SendVRAM, parameters: [this.memory.VRAM] });
-    }
-
-    private GetXY(x: number, y: number): number {
-        return RES_X * y + x;
     }
 
     private UnknownOpcode(currentOpcode: number): void {
