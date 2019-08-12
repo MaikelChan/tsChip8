@@ -39,4 +39,8 @@ export class ASCIIRenderer implements IRenderer {
         this.div.style.backgroundColor = offColor;
         this.div.style.color = onColor;
     }
+
+    public UpdateRendererResolution(): void {
+
+    }
 }

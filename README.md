@@ -20,7 +20,7 @@ I love emulation, so back in 2012 I wanted to do my first emulator, and Chip8 se
 
 > CHIP-8 has a descendant called [SCHIP (Super Chip)](https://en.wikipedia.org/wiki/CHIP-8#CHIP-8_today), introduced by Erik Bryntse. In 1990, a CHIP-8 interpreter called CHIP-48 was made for HP-48 graphing calculators so that games could be programmed more easily. Its extensions to CHIP-8 are what became known as SCHIP. It features a larger resolution and several additional opcodes meant to make programming easier.
 
-This complicated things a bit since, besides the extended capabilities of the SuperChip, Chip8 games can also work differently in a SuperChip capable device.
+This complicated things a bit because, besides the extended capabilities of the SuperChip, Chip8 games can also work differently in a SuperChip capable device.
 
 Back in the day, there was also a lack of proper documentation of some features from Chip8, so that didn't help either, since this also affected to some games that were programmed incorrectly. So even if a Chip8 emulator implements the specs right, it will fail to execute correctly those games, and they will only work on emulators that implement those specs also wrong.
 
@@ -30,13 +30,14 @@ So after much investigation, I figured out what the actual behaviour of the Chip
 
 - Full Chip8 and SuperChip compatibility.
 - Settings that allow to simulate wrong behaviours in order to execute problematic games.
-- Three rendering modes that can be switched at any time:
+- Four rendering modes that can be switched at any time:
     1. WebGL: The game is shown in some kind of led screen in a virtual 3D environment, that features some realtime lighting and a screen refresh rate shader effect. Because why not!
     2. WebGL-Voxel: Similar to the WebGL renderer but the screen is rendered with GPU instanced voxels.
     3. Canvas: The game will be rendered into a 2D canvas.
     4. ASCII: The game will be rendered with text characters. Easy to implement since the Chip8 and SuperChip are monochrome.
 - All rendering modes allow to customize rendering colors.
 - Sound is also emulated. Chip8 has very basic sound capabilities. It's only capable to reproduce a "beep" sound of configurable duration.
+- It includes a bunch of public domain ROMs for you to play and test, and also a simple game made by myself called LOL Hunt.
 
 ## How to play
 

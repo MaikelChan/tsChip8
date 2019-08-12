@@ -52,7 +52,7 @@ export class Chip8 {
 		this.InitializeWorker();
 	}
 
-	private Initialize(file: File, initialSettins: IInitialSettings): void {
+	private Initialize(file: Blob, initialSettins: IInitialSettings): void {
 		if (this.emulationState !== EmulationStates.Stopped) return;
 
 		this.initialSettings = initialSettins;
@@ -132,7 +132,7 @@ export class Chip8 {
 		switch (command.id) {
 			case MainCommandIDs.Run:
 				if (command.parameters === undefined) break;
-				let file = command.parameters[0] as File;
+				let file = command.parameters[0] as Blob;
 				this.Initialize(file, command.parameters[1]);
 				break;
 			case MainCommandIDs.Stop:

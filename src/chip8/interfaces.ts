@@ -26,4 +26,27 @@ export interface IDisposable {
 export interface IRenderer extends IDisposable {
     SetVRAM(VRAM: Uint8Array): void;
     SetColors(offColor: string, onColor: string): void;
+    UpdateRendererResolution(): void;
+}
+
+export interface IPanel {
+    Enable(): void;
+    Disable(): void;
+}
+
+export interface IROMArchive {
+    chip8: IROMCategory;
+    schip: IROMCategory;
+}
+
+export interface IROMCategory {
+    basePath: string;
+    roms: IROMInfo[];
+}
+
+export interface IROMInfo {
+    fileName: string;
+    title: string;
+    author: string;
+    date: string;
 }
