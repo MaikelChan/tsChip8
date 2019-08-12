@@ -182,12 +182,12 @@ export class Main {
     private PopulateROMList(): void {
         if (this.romArchive === undefined) return;
 
-        let base: string = "<option>" + this.romArchive.chip8.basePath + "/";
+        let base: string = "<option>" + this.romArchive.chip8.basePath;
         for (let r: number = 0; r < this.romArchive.chip8.roms.length; r++) {
             this.romSelect.innerHTML += base + this.romArchive.chip8.roms[r].fileName + "</option>";
         }
 
-        base = "<option>" + this.romArchive.schip.basePath + "/";
+        base = "<option>" + this.romArchive.schip.basePath;
         for (let r: number = 0; r < this.romArchive.schip.roms.length; r++) {
             this.romSelect.innerHTML += base + this.romArchive.schip.roms[r].fileName + "</option>";
         }
@@ -202,10 +202,10 @@ export class Main {
 
         if (this.romArchive === undefined) return;
 
-        let info = this.GetROMInfo(this.romSelect.selectedIndex);
+        let info = this.GetROMInfo(index);
         if (info === undefined) return;
 
-        let path: string = "./roms/" + info.basePath + "/" + info.romInfo.fileName;
+        let path: string = "./roms/" + info.basePath + info.romInfo.fileName;
 
         let request = new XMLHttpRequest();
         request.addEventListener("load", this.FinishROMLoadingFromList);

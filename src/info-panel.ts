@@ -30,7 +30,7 @@ export class InfoPanel implements IPanel {
 
         let request = new XMLHttpRequest();
         request.addEventListener("load", this.FinishDescriptionLoading);
-        let path: string = "./roms/" + info.basePath + "/" + info.romInfo.fileName + ".txt";
+        let path: string = "./roms/" + info.basePath + info.romInfo.fileName + ".txt";
         request.open("GET", path, true);
         request.send(null);
     }
