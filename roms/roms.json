@@ -1,0 +1,222 @@
+{
+    "chip8": {
+        "basePath": "chip8",
+        "roms": [
+            {
+                "fileName": "15PUZZLE",
+                "title": "15 Puzzle",
+                "author": "Roger Ivie",
+                "date": ""
+            },
+            {
+                "fileName": "BLINKY",
+                "title": "Blinky",
+                "author": "Hans Christian Egeberg",
+                "date": "1991"
+            },
+            {
+                "fileName": "BLITZ",
+                "title": "Blitz",
+                "author": "David Winter",
+                "date": ""
+            },
+            {
+                "fileName": "BRIX",
+                "title": "Brix",
+                "author": "Andreas Gustafsson",
+                "date": "1990"
+            },
+            {
+                "fileName": "CONNECT4",
+                "title": "Connect 4",
+                "author": "David Winter",
+                "date": ""
+            },
+            {
+                "fileName": "GUESS",
+                "title": "Guess",
+                "author": "David Winter",
+                "date": ""
+            },
+            {
+                "fileName": "HIDDEN",
+                "title": "Hidden",
+                "author": "David Winter",
+                "date": "1996"
+            },
+            {
+                "fileName": "INVADERS",
+                "title": "Space Invaders",
+                "author": "David Winter",
+                "date": ""
+            },
+            {
+                "fileName": "KALEID",
+                "title": "Kaleidoscope",
+                "author": "Joseph Weisbecker",
+                "date": "1978"
+            },
+            {
+                "fileName": "MAZE",
+                "title": "Maze",
+                "author": "David Winter",
+                "date": "199X"
+            },
+            {
+                "fileName": "MERLIN",
+                "title": "Merlin",
+                "author": "David Winter",
+                "date": ""
+            },
+            {
+                "fileName": "MISSILE",
+                "title": "Missile",
+                "author": "David Winter",
+                "date": ""
+            },
+            {
+                "fileName": "PONG",
+                "title": "Pong",
+                "author": "Paul Vervalin",
+                "date": "1990"
+            },
+            {
+                "fileName": "PONG2",
+                "title": "Pong 2",
+                "author": "",
+                "date": ""
+            },
+            {
+                "fileName": "PUZZLE",
+                "title": "Puzzle",
+                "author": "",
+                "date": ""
+            },
+            {
+                "fileName": "SYZYGY",
+                "title": "Syzygy",
+                "author": "Roy Trevino",
+                "date": "1990"
+            },
+            {
+                "fileName": "TANK",
+                "title": "Tank",
+                "author": "",
+                "date": ""
+            },
+            {
+                "fileName": "TETRIS",
+                "title": "Tetris",
+                "author": "Fran Dachille",
+                "date": "1991"
+            },
+            {
+                "fileName": "TICTAC",
+                "title": "Tic-Tac-Toe",
+                "author": "David Winter",
+                "date": ""
+            },
+            {
+                "fileName": "UFO",
+                "title": "UFO",
+                "author": "Lutz V",
+                "date": "1992"
+            },
+            {
+                "fileName": "VBRIX",
+                "title": "Vertical Brix",
+                "author": "Paul Robson",
+                "date": "1996"
+            },
+            {
+                "fileName": "VERS",
+                "title": "Vers",
+                "author": "JMN",
+                "date": "1991"
+            },
+            {
+                "fileName": "WIPEOFF",
+                "title": "Wipe Off",
+                "author": "Joseph Weisbecker",
+                "date": ""
+            }
+        ]
+    },
+    "schip": {
+        "basePath": "schip",
+        "roms": [
+            {
+                "fileName": "ALIEN",
+                "title": "Alien",
+                "author": "Jonas Lindstedt",
+                "date": "1993"
+            },
+            {
+                "fileName": "ANT",
+                "title": "Ant - In Search of Coke",
+                "author": "Erin S. Catto",
+                "date": ""
+            },
+            {
+                "fileName": "BLINKY",
+                "title": "Blinky",
+                "author": "Hans Christian Egeberg",
+                "date": "1991"
+            },
+            {
+                "fileName": "CAR",
+                "title": "Car",
+                "author": "Klaus von Sengbusch",
+                "date": "1994"
+            },
+            {
+                "fileName": "FIELD",
+                "title": "Field!",
+                "author": "Al Roland",
+                "date": "1993"
+            },
+            {
+                "fileName": "JOUST",
+                "title": "Joust",
+                "author": "Erin S. Catto",
+                "date": "1993"
+            },
+            {
+                "fileName": "LOL-HUNT",
+                "title": "LOL Hunt",
+                "author": "PacoChan",
+                "date": "2012"
+            },
+            {
+                "fileName": "PIPER",
+                "title": "H. Piper",
+                "author": "Paul Raines",
+                "date": "1991"
+            },
+            {
+                "fileName": "RACE",
+                "title": "Car Race Demo",
+                "author": "Erik Bryntse",
+                "date": "1991"
+            },
+            {
+                "fileName": "SPACEFIG",
+                "title": "Spacefight 2091",
+                "author": "Carsten Soerensen",
+                "date": "1992"
+            },
+            {
+                "fileName": "UBOAT",
+                "title": "U-Boat",
+                "author": "Michael Kemper",
+                "date": "1994"
+            },
+            {
+                "fileName": "WORM3",
+                "title": "SuperWorm V3",
+                "author": "RB",
+                "date": "1992"
+            }
+        ]
+    }
+}

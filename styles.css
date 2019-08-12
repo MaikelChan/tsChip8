@@ -18,8 +18,14 @@ body {
 }
 
 p {
-    margin: 0 0 -10px 0;
+    margin-block-start: 0.0em;
+    margin-block-end: 0.0em;
     font-family: Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", monospace;
+}
+
+h1, h2 {
+    margin-block-start: 1.0em;
+    margin-block-end: 0.0em;
 }
 
 #page-container {
@@ -29,9 +35,10 @@ p {
 }
 
 #header {
+    display: flex;
     background-color: #303030;
-    height: 34px;
-    padding: 6px 0 0 6px;
+    background-image: url("./img/header.png");
+    height: 40px;
 }
 
 #main-container {
@@ -46,43 +53,68 @@ p {
     background-color: black;
 }
 
-#sidebar {
+.button {
+    width: 80px;
+    height: 40px;
+    cursor: pointer;
+}
+
+#button-load {
+    margin: 0 0 0 10px;
+    background-image: url("./img/load.png");
+}
+
+#button-load:hover {
+    background-image: url("./img/load-hover.png");
+}
+
+#button-run {
+    background-image: url("./img/play.png");
+}
+
+#button-run:hover {
+    background-image: url("./img/play-hover.png");
+}
+
+#button-stop {
+    background-image: url("./img/stop.png");
+}
+
+#button-stop:hover {
+    background-image: url("./img/stop-hover.png");
+}
+
+.disabled {
+    filter: grayscale(100%);
+}
+
+#github {
+    margin: 4px 10px 0 4px;
+}
+
+.side-panel {
     display: none;
     background-color: #202020;
-    width: 256px;
+    width: 400px;
+    height: 100%;
+    overflow: auto;
+    padding: 0 16px 0 16px;
 }
 
-.button {
-    background: #e0e0e0;
-    background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
-    color: #000000;
-    border: solid #bdbdbd 1px;
-    text-decoration: none;
-    display: inline-block;
-    height: 24px;
-    line-height: 24px;
-    user-select: none;
+#button-info-panel {
+    background-image: url("./img/info.png");
+    margin: 4px 4px 0 auto;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
 }
 
-.button:hover {
-    background: #f0f0f0;
-    background-image: linear-gradient(to bottom, #ffffff, #f0f0f0);
-}
-
-.button label {
-    user-select: none;
-    padding: 2px 10px 2px 10px;
-    cursor: pointer;
-}
-
-.action-buttons {
-    width: 30px;
-    text-align: center;
+#files {
+    display: none !important;
 }
 
 #color-picker-on,
 #color-picker-off {
-    height: 28px;
+    height: 32px;
     vertical-align: middle;
 }
