@@ -18,7 +18,7 @@ export const VertexLitInstanced = {
         attribute vec3 position;
         attribute vec3 normal;
         attribute vec4 color;
-        attribute vec3 translate;
+        attribute vec2 translate;
 
         uniform mat4 modelMatrix;
         uniform mat4 viewMatrix;
@@ -41,7 +41,7 @@ export const VertexLitInstanced = {
         void main() {
             float size = mix(0.75, 1.0, sin((time * -4.0) + (translate.x * 0.05)) * 0.5 + 0.5);
 
-            vec3 worldPosition = vec3(modelMatrix * vec4(position * size, 1.0)) + translate;
+            vec3 worldPosition = vec3(modelMatrix * vec4(position * size, 1.0)) + vec3(translate, 0);
             vec3 worldNormal = normalize(normalMatrix * normal);
 
             vec3 direction0 = normalize(light0_position - worldPosition);

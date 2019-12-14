@@ -98,19 +98,18 @@ export class WebGLVoxelRenderer implements IRenderer {
         this.voxelGeometry.attributes = cubeGeometry.attributes;
 
         const instances: number = RES_X * RES_Y;
-        this.voxelTranslations = new Float32Array(instances * 3);
+        this.voxelTranslations = new Float32Array(instances * 2);
 
         let i: number = 0;
         for (let y = 0; y < RES_Y; y++) {
             for (let x = 0; x < RES_X; x++) {
                 this.voxelTranslations[i + 0] = x;
                 this.voxelTranslations[i + 1] = -y;
-                this.voxelTranslations[i + 2] = 0;
                 i += 3;
             }
         }
 
-        this.voxelTranslationsBuffer = new THREE.InstancedBufferAttribute(this.voxelTranslations, 3);
+        this.voxelTranslationsBuffer = new THREE.InstancedBufferAttribute(this.voxelTranslations, 2);
         this.voxelTranslationsBuffer.setUsage(THREE.DynamicDrawUsage);
 
         this.voxelGeometry.setAttribute("translate", this.voxelTranslationsBuffer);
@@ -228,14 +227,12 @@ export class WebGLVoxelRenderer implements IRenderer {
                 if (value === 1) {
                     this.voxelTranslations[i + 0] = x;
                     this.voxelTranslations[i + 1] = -y;
-                    this.voxelTranslations[i + 2] = 0;
                 }
                 else {
                     this.voxelTranslations[i + 0] = 0;
                     this.voxelTranslations[i + 1] = -100;
-                    this.voxelTranslations[i + 2] = 0;
                 }
-                i += 3;
+                i += 2;
             }
         }
 
