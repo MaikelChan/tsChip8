@@ -22,7 +22,7 @@ export class WebGLRenderer implements IRenderer {
 	private screenMaterial: THREE.ShaderMaterial;
 	private screenGeometry: THREE.BufferGeometry;
 	private screenVertexColors: Float32Array;
-	private screenColorBuffer: THREE.Float32BufferAttribute;
+	private screenColorBuffer: THREE.BufferAttribute;
 
 	private floorMaterial: THREE.MeshPhongMaterial;
 	private floorGeometry: THREE.PlaneBufferGeometry;
@@ -85,16 +85,15 @@ export class WebGLRenderer implements IRenderer {
 				fragmentShader: DotShader.fragmentShader,
 				transparent: true,
 				depthTest: false,
-				blending: THREE.AdditiveBlending,
-				vertexColors: THREE.VertexColors
+				blending: THREE.AdditiveBlending
 			});
 
 		// Geometry for the screen points
 
 		this.screenGeometry = new THREE.BufferGeometry();
 
-		const bufferLength: number = RES_X * RES_Y * 3;
-		let screenVertexPositions: Float32Array = new Float32Array(bufferLength);
+		const bufferLength: number = RES_X * RES_Y;
+		let screenVertexPositions: Float32Array = new Float32Array(bufferLength * 3);
 		this.screenVertexColors = new Float32Array(bufferLength);
 
 		let i: number = 0;
@@ -103,20 +102,17 @@ export class WebGLRenderer implements IRenderer {
 				screenVertexPositions[i + 0] = x;
 				screenVertexPositions[i + 1] = -y;
 				screenVertexPositions[i + 2] = 0;
-				this.screenVertexColors[i + 0] = 0;
-				this.screenVertexColors[i + 1] = 0;
-				this.screenVertexColors[i + 2] = 0;
 				i += 3;
 			}
 		}
 
-		let screenPositionBuffer: THREE.Float32BufferAttribute = new THREE.Float32BufferAttribute(screenVertexPositions, 3);
-		screenPositionBuffer.setDynamic(false);
-		this.screenColorBuffer = new THREE.Float32BufferAttribute(this.screenVertexColors, 3);
-		this.screenColorBuffer.setDynamic(true);
+		let screenPositionBuffer: THREE.BufferAttribute = new THREE.BufferAttribute(screenVertexPositions, 3);
+		screenPositionBuffer.setUsage(THREE.StaticDrawUsage);
+		this.screenColorBuffer = new THREE.BufferAttribute(this.screenVertexColors, 1);
+		this.screenColorBuffer.setUsage(THREE.DynamicDrawUsage);
 
-		this.screenGeometry.addAttribute("position", screenPositionBuffer);
-		this.screenGeometry.addAttribute("color", this.screenColorBuffer);
+		this.screenGeometry.setAttribute("position", screenPositionBuffer);
+		this.screenGeometry.setAttribute("dotValue", this.screenColorBuffer);
 
 		// Create the screen points
 
@@ -146,7 +142,7 @@ export class WebGLRenderer implements IRenderer {
 		//bgGeometry.attributes.color. .getAttribute("color").array;
 
 		const c1 = ENV_COLOR1;
-        const c2 = ENV_COLOR2;
+		const c2 = ENV_COLOR2;
 		let bgColors: THREE.Color[] = [c1, c2, c1, c2, c2, c1, c1, c2, c1, c2, c2, c1, c1, c1, c1, c1, c1, c1, c2, c2, c2, c2, c2, c2, c1, c1, c1, c1, c1, c1, c1, c2, c1, c2, c2, c1];
 
 		for (let f = 0; f < this.bgGeometry.faces.length; f++) {
@@ -229,18 +225,14 @@ export class WebGLRenderer implements IRenderer {
 	public SetVRAM(VRAM: Uint8Array): void {
 		this.VRAM = VRAM;
 
-		let i: number = 0;
 		for (let y = 0; y < RES_Y; y++) {
 			for (let x = 0; x < RES_X; x++) {
-				let value: number = this.VRAM[RES_X * y + x];
-				this.screenVertexColors[i + 0] = value;
-				this.screenVertexColors[i + 1] = value;
-				this.screenVertexColors[i + 2] = value;
-				i += 3;
+				let index: number = RES_X * y + x;
+				this.screenVertexColors[index] = this.VRAM[index];
 			}
 		}
 
-		this.screenColorBuffer.setArray(this.screenVertexColors);
+		// Update the screenColorBuffer to get the updated values from the screenVertexColors array 
 		this.screenColorBuffer.needsUpdate = true;
 
 		this.UpdateLights();

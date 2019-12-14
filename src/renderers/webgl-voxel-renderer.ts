@@ -111,9 +111,9 @@ export class WebGLVoxelRenderer implements IRenderer {
         }
 
         this.voxelTranslationsBuffer = new THREE.InstancedBufferAttribute(this.voxelTranslations, 3);
-        this.voxelTranslationsBuffer.setDynamic(true);
+        this.voxelTranslationsBuffer.setUsage(THREE.DynamicDrawUsage);
 
-        this.voxelGeometry.addAttribute("translate", this.voxelTranslationsBuffer);
+        this.voxelGeometry.setAttribute("translate", this.voxelTranslationsBuffer);
 
         // Create the mesh
 
@@ -239,7 +239,7 @@ export class WebGLVoxelRenderer implements IRenderer {
             }
         }
 
-        this.voxelTranslationsBuffer.setArray(this.voxelTranslations);
+        // Update the voxelTranslationsBuffer to get the updated values from the voxelTranslations array 
         this.voxelTranslationsBuffer.needsUpdate = true;
     }
 

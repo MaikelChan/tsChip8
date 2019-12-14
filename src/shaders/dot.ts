@@ -12,6 +12,8 @@ export const DotShader = {
 	},
 
 	vertexShader: `
+		attribute float dotValue;
+
 		uniform float time;
         uniform vec3 colorOff;
         uniform vec3 colorOn;
@@ -28,7 +30,7 @@ export const DotShader = {
 
 			vec3 colorFade = mix(colorOff, colorOn, 0.7);
             vec3 fadeAnim = mix(colorOn, colorFade, mod(gl_Position.y + time, 100.0) / 64.0);
-            vColor = mix(colorOff, fadeAnim, color);
+            vColor = mix(colorOff, fadeAnim, dotValue);
 		}`,
 
 	fragmentShader: `
