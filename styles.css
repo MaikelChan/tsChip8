@@ -1,5 +1,4 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Jaldi&display=swap');
-
 html {
     margin: 0;
     margin: 0;
@@ -113,8 +112,7 @@ h1, h2 {
     display: none !important;
 }
 
-#color-picker-on,
-#color-picker-off {
+#color-picker-on, #color-picker-off {
     height: 32px;
     vertical-align: middle;
 }

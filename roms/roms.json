@@ -1,6 +1,6 @@
 {
     "chip8": {
-        "basePath": "chip8",
+        "basePath": "chip8/",
         "roms": [
             {
                 "fileName": "15PUZZLE",
@@ -143,7 +143,7 @@
         ]
     },
     "schip": {
-        "basePath": "schip",
+        "basePath": "schip/",
         "roms": [
             {
                 "fileName": "ALIEN",
