@@ -10,35 +10,29 @@
 <body>
     <div id="page-container">
         <div id="header">
+            <select id="select-rom" title="Select one of the following ROMs and then hit Play to play it.">
+                <option>Select a ROM</option>
+            </select>
+
             <input type="file" id="files" name="file" />
-            <label class="button" id="button-load" for="files" title="Load ROM"></label>
-            <div class="button" id="button-run" title="Play"></div>
-            <div class="button disabled" id="button-stop" title="Stop"></div>
+            <label class="button" id="button-load" for="files" title="Load ROM from your device."></label>
+            <div class="button" id="button-run" title="Play the loaded or selected ROM."></div>
+            <div class="button disabled" id="button-stop" title="Stop the currently playing ROM."></div>
 
-            <div>
-                <select id="select-rom">
-                    <option>Select a ROM</option>
-                </select>
-            </div>
+            <input type="color" id="color-picker-off" class="color-button" name="favcolor" value="#500000" title="Select the background color.">
+            <input type="color" id="color-picker-on" class="color-button" name="favcolor" value="#ff8800" title="Select the foreground color.">
 
-            <div style="display: inline; margin-left: 20px">Screen colors:</div>
-            <input type="color" id="color-picker-off" name="favcolor" value="#500000">
-            <input type="color" id="color-picker-on" name="favcolor" value="#ff8800">
+            <select id="select-renderer" title="Select a renderer.">
+                <option value="webgl">WebGL-LED</option>
+                <option value="webgl-voxel">WebGL-Voxel</option>
+                <option value="canvas">Canvas</option>
+                <option value="ascii">ASCII</option>
+            </select>
 
-            <div style="display: inline; margin-left: 20px">
+            <div class="settings-checkboxes">
                 <span>Compatibility settings:</span>
-                <input type="checkbox" name="emulation-settings" id="8xy6-checkbox" title="Leave unchecked for correct emulation. However, some broken games might need this checked.">Alternative 8xy6 Opcode
-                <input type="checkbox" name="emulation-settings" id="Fx55-checkbox" title="Leave unchecked for correct emulation. However, some broken games might need this checked.">Alternative Fx55 Opcode
-            </div>
-
-            <div style="display: inline; margin-left: 20px">
-                <span title="Select a renderer.">Renderer:</span>
-                <select id="select-renderer">
-                    <option value="webgl">WebGL</option>
-                    <option value="webgl-voxel">WebGL-Voxel</option>
-                    <option value="canvas">Canvas</option>
-                    <option value="ascii">ASCII</option>
-                </select>
+                <input type="checkbox" name="emulation-settings" id="8xy6-checkbox" title="Alternative 8xy6 Opcode. Leave unchecked for correct emulation. However, some broken games might need this enabled.">
+                <input type="checkbox" name="emulation-settings" id="Fx55-checkbox" title="Alternative Fx55 Opcode. Leave unchecked for correct emulation. However, some broken games might need this enabled.">
             </div>
 
             <div id="button-info-panel" title="Toggle Info Panel"></div>
