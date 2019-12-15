@@ -31,7 +31,7 @@ So after much investigation, I figured out what the actual behaviour of the Chip
 - Full Chip8 and SuperChip compatibility.
 - Settings that allow to simulate wrong behaviours in order to execute problematic games.
 - Four rendering modes that can be switched at any time:
-    1. WebGL: The game is shown in some kind of led screen in a virtual 3D environment, that features some realtime lighting and a screen refresh rate shader effect. Because why not!
+    1. WebGL-LED: The game is shown in some kind of led screen in a virtual 3D environment, that features some realtime lighting and a screen refresh rate shader effect. Because why not!
     2. WebGL-Voxel: Similar to the WebGL renderer but the screen is rendered with GPU instanced voxels.
     3. Canvas: The game will be rendered into a 2D canvas.
     4. ASCII: The game will be rendered with text characters. Easy to implement since the Chip8 and SuperChip are monochrome.
@@ -41,7 +41,7 @@ So after much investigation, I figured out what the actual behaviour of the Chip
 
 ## How to play
 
-Right now, you will need to load a Chip8 or SuperChip from your PC. It would be nice to include several ROMs, but I need to check I'm allowed to do that.
+You can load any of the included ROMs in the list located at the top left corner of the window, and the press Play. You can also load a ROM stored in your device with the Load button.
 
 The Chip8 / SuperChip key pad is mapped to the following keyboard keys (the inputs depend on each game):
 
@@ -50,9 +50,11 @@ The Chip8 / SuperChip key pad is mapped to the following keyboard keys (the inpu
     A S D F
     Z X C V
 
+All included ROMs work out of the box. However, due to some features of the Chip8 being wrongly documented, there are some games out there with bad code that will present issues. If you see graphical glitches in a game, stop it, change the compatibility settings, and then hit Play again. Some games will require one of them enabled, or maybe even both. Try until you get the game working.
+
 ## Screenshots
 
 ![Screenshot 00](/00.jpg)
-![Screenshot 00](/01.jpg)
-![Screenshot 00](/02.jpg)
-![Screenshot 00](/03.jpg)
+![Screenshot 01](/01.jpg)
+![Screenshot 02](/02.jpg)
+![Screenshot 03](/03.jpg)
