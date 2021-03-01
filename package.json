@@ -17,6 +17,6 @@
         "worker-loader": "^2.0.0"
     },
     "dependencies": {
-        "three": "^0.111.0"
+        "three": "^0.125.0"
     }
 }
