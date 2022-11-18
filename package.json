@@ -13,7 +13,7 @@
         "ts-loader": "^6.2.1",
         "typescript": "^3.7.3",
         "webpack": "^4.41.2",
-        "webpack-cli": "^3.3.10",
+        "webpack-cli": "^3.3.12",
         "worker-loader": "^2.0.0"
     },
     "dependencies": {
